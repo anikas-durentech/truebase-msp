@@ -32,7 +32,7 @@
                 Explore Our Services
             </a>
             <a
-                href="telephone:+1234567890"
+                href="tel:+1234567890"
                 class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white px-8 py-4 rounded-full font-bold text-lg transition-colors w-full sm:w-auto shadow-lg"
             >
                 Call Us Today
