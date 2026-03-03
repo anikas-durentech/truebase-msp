@@ -256,3 +256,21 @@
         </div>
     </div>
 </section>
+
+<section class="py-24 bg-gray-100 border-t border-gray-200">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="font-heading text-4xl font-bold text-blue-900 mb-6">Ready to Optimize Your IT Infrastructure?</h2>
+        <p class="font-sans text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+            Contact TrueBase today for a free consultation and discover how our managed IT services can streamline your operations and secure your business data.
+        </p>
+        <a 
+            href="tel:+1234567890" 
+            class="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-10 py-5 rounded-full font-bold text-xl hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-lg"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <span>Get in Touch Now</span>
+        </a>
+    </div>
+</section>
