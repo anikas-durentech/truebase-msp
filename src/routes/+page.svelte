@@ -207,3 +207,52 @@
         </div>
     </div>
 </section>
+
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="font-heading text-4xl font-bold text-blue-900 mb-4">Trusted by Local Businesses</h2>
+            <p class="font-sans text-xl text-gray-600 max-w-2xl mx-auto">
+                Don't just take our word for it. Here is what our partners have to say about working with TrueBase.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm relative">
+                <svg class="absolute top-6 left-6 w-10 h-10 text-blue-200" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                    <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                </svg>
+                <p class="relative z-10 text-gray-700 text-lg mb-6 pl-12 pt-4">
+                    "I recently discovered Will Duren from another local business who had used his service, and was quite pleased. I am thrilled to have a local IT expert to help with business computer needs. He recently did a fantastic job refurbishing several laptops for my office, and made excellent suggestions about upgrades with performance and cost efficacy in mind. Everything is working great and we are so pleased. He has also been super helpful with our office IT needs improving security and functionality of our Wi-Fi. He is very punctual and communication has been great. 5+ stars!"
+                </p>
+                <div class="flex items-center gap-4 pl-12">
+                    <div class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center text-blue-800 font-bold font-heading">
+                        LS
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-blue-900">Dr. Lisa Shaw</h5>
+                        <p class="text-sm text-gray-500">East Cobb Integral Physical Therapy</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm relative">
+                <svg class="absolute top-6 left-6 w-10 h-10 text-blue-200" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                    <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                </svg>
+                <p class="relative z-10 text-gray-700 text-lg mb-6 pl-12 pt-4">
+                    "As a small business owner, it is hard to employ full-time computer tech.  Will was referred to us by a colleague and has been invaluable in helping us troubleshoot various computer issues as well as advising on future computer purchases, storage and backups options.  Will is a great communicator, works quickly and is very professional.  We refer Will to our fellow small business owners as well as friends and family every opportunity we get."
+                </p>
+                <div class="flex items-center gap-4 pl-12">
+                    <div class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center text-blue-800 font-bold font-heading">
+                        SW
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-blue-900">Stacy Wyatt</h5>
+                        <p class="text-sm text-gray-500">Stacey Wyatt Real Estate Group</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
