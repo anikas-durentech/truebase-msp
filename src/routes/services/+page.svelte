@@ -1,0 +1,115 @@
+<script>
+    import { onMount } from 'svelte';
+    import { fade, fly } from 'svelte/transition';
+
+    let isLoaded = false;
+    onMount(() => {
+        isLoaded = true;
+    });
+
+    const services = [
+        {
+            title: "Managed IT Services",
+            description: "Comprehensive support and proactive maintenance for your entire technology infrastructure, minimizing downtime and maximizing productivity.",
+            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`
+        },
+        {
+            title: "Data Backup Archival Services",
+            description: "Automated, secure backups and long-term archiving solutions to ensure your critical business data is protected against loss and easily recoverable.",
+            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />`
+        },
+        {
+            title: "Email Spam Filtering",
+            description: "Advanced filtering algorithms to block phishing attempts, malware, and unwanted spam before they ever reach your employees' inboxes.",
+            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`
+        },
+        {
+            title: "Cybersecurity Login Management",
+            description: "Implement robust access controls, multi-factor authentication (MFA), and secure sign-on protocols to protect your business network from unauthorized access.",
+            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />`
+        },
+        {
+            title: "Endpoint Management",
+            description: "Centralized monitoring, patching, and security management for all company devices, including laptops, desktops, and mobile phones.",
+            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />`
+        },
+        {
+            title: "Business Password Manager",
+            description: "Secure, encrypted password vaults for your team. Safely share credentials, enforce strong password policies, and revoke access instantly when needed.",
+            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />`
+        }
+    ];
+</script>
+
+<svelte:head>
+    <title>Our Services | TrueBase Managed IT</title>
+    <meta name="description" content="Explore our managed IT services, cybersecurity solutions, data backup, and endpoint management for your business." />
+</svelte:head>
+
+<section class="bg-blue-900 py-20 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-blue-950/50 mix-blend-multiply z-0"></div>
+    <div class="container mx-auto px-6 relative z-10">
+        {#if isLoaded}
+            <div in:fly={{ y: 20, duration: 800 }}>
+                <h1 class="font-heading text-4xl md:text-5xl font-bold mb-6">Comprehensive IT Solutions</h1>
+                <p class="font-sans text-xl text-blue-100 max-w-3xl">
+                    We provide a full stack of technology services designed to secure your data, streamline your operations, and support your team's day-to-day needs.
+                </p>
+            </div>
+        {/if}
+    </div>
+</section>
+
+<section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {#if isLoaded}
+                {#each services as service, index}
+                    <div 
+                        class="relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group overflow-hidden cursor-pointer"
+                        in:fly={{ y: 40, duration: 800, delay: 150 + (index * 100) }}
+                    >
+                        <div class="absolute top-0 left-0 w-full h-1 bg-blue-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"></div>
+                        
+                        <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-3 group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-md transition-all duration-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                {@html service.icon}
+                            </svg>
+                        </div>
+                        
+                        <h3 class="font-heading text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700 transition-colors duration-300">{service.title}</h3>
+                        
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            {service.description}
+                        </p>
+
+                        <div class="flex items-center text-blue-600 font-semibold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
+                            <span>Contact us about this</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                    </div>
+                {/each}
+            {/if}
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-white border-t border-gray-100">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-blue-900 mb-6">Need a custom IT solution?</h2>
+        <p class="font-sans text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+            Let's discuss how TrueBase can tailor these services to fit the unique needs of your business.
+        </p>
+        <a 
+            href="tel:+1234567890" 
+            class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-10 py-4 rounded-full font-bold text-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-lg"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <span>Call Us Today</span>
+        </a>
+    </div>
+</section>
