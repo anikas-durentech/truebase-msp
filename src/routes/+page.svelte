@@ -146,3 +146,64 @@
         </div>
     </div>
 </section>
+
+<section class="py-20 bg-blue-900 text-white">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col lg-flex-row items-center gap-12">
+            <div class="lg:w-1/2">
+                <h2 class="font-heading text-4xl font-bold mb-6">Why Choose TrueBase?</h2>
+                <p class="font-sans text-xl text-blue-100 mb-8">
+                    We don't just fix computers when they break. We act as your strategic technology partner, proactively managing your network so you experience less downtime and more growth.
+                </p>
+
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 bg-blue-700 p-2 rounded-lg text-blue-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg> 
+                        </div>
+
+                        <div>
+                            <h4 class="font-heading font-bold text-xl mb-1">24/7 Proactive Monitoring</h4>
+                            <p class="text-blue-200">We detect and resolve technical issues in the background before they ever impact your daily operations.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 bg-blue-700 p-2 rounded-lg text-blue-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-bold text-xl mb-1">Security-First Approach</h4>
+                            <p class="text-blue-200">From email spam filtering to strict login management, your data is fortified against modern cyber threats.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:w-1/2 w-full">
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="bg-blue-800/50 border border-blue-700 p-8 rounded-2xl text-center backdrop-blur-sm hover:-translate-y-1 transition-transform duration-300">
+                        <div class="text-5xl font-bold text-blue-400 mb-2 font-heading">99.9%</div>
+                        <div class="text-blue-100 font-semibold">Uptime Guarantee</div>
+                    </div>
+                    <div class="bg-blue-800/50 border border-blue-700 p-8 rounded-2xl text-center backdrop-blur-sm hover:-translate-y-1 transition-transform duration-300">
+                        <div class="text-5xl font-bold text-blue-400 mb-2 font-heading">15m</div>
+                        <div class="text-blue-100 font-semibold">Average Response Time</div>
+                    </div>
+                    <div class="bg-blue-800/50 border border-blue-700 p-8 rounded-2xl text-center backdrop-blur-sm hover:-translate-y-1 transition-transform duration-300">
+                        <div class="text-5xl font-bold text-blue-400 mb-2 font-heading">24/7</div>
+                        <div class="text-blue-100 font-semibold">Support Availability</div>
+                    </div>
+                    <div class="bg-blue-800/50 border border-blue-700 p-8 rounded-2xl text-center backdrop-blur-sm hover:-translate-y-1 transition-transform duration-300">
+                        <div class="text-5xl font-bold text-blue-400 mb-2 font-heading">100%</div>
+                        <div class="text-blue-100 font-semibold">Data Protection</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
