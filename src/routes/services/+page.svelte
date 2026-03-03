@@ -39,6 +39,29 @@
             icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />`
         }
     ];
+
+    const processSteps = [
+        {
+            stepNumber: "Phase 01",
+            title: "Discovery & Assessment",
+            description: "We start by auditing your current IT infrastructure, identifying vulnerabilities, performance bottlenecks, and areas for immediate improvement."
+        },
+        {
+            stepNumber: "Phase 02",
+            title: "Strategic Planning",
+            description: "Our team designs a customized technology roadmap aligned with your business goals, ensuring you have the right tools without paying for unnecessary extras."
+        },
+        {
+            stepNumber: "Phase 03",
+            title: "Seamless Onboarding",
+            description: "We deploy our monitoring agents, configure your backups, and secure your endpoints with minimal disruption to your daily operations."
+        },
+        {
+            stepNumber: "Phase 04",
+            title: "Proactive Management",
+            description: "Your systems are monitored 24/7. We handle the updates, patch management, and helpdesk support so you can focus on running your business."
+        },
+    ]
 </script>
 
 <svelte:head>
@@ -92,6 +115,64 @@
                     </div>
                 {/each}
             {/if}
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-white overflow-hidden">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-20">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-blue-900 mb-4">How We Work With You</h2>
+            <p class="font-sans text-xl text-gray-600 max-w-2xl mx-auto">
+                Transitioning your IT support shouldn't be stressful. Our proven onboarding process ensures a smooth handover and immediate improvements to your network stability.
+            </p>
+        </div>
+
+        <div class="max-w-5xl mx-auto relative">
+            <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-blue-100 transform -translate-x-1/2 rounded-full"></div>
+
+            <div class="space-y-16">
+                {#if isLoaded}
+                    {#each processSteps as step, index}
+                        <div class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center group">
+                            
+                            <div class="hidden md:block w-5/12 text-right pr-10">
+                                {#if index % 2 === 0}
+                                    <div in:fly={{ x: -40, duration: 800, delay: 200 + (index * 200) }}>
+                                        <h3 class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2">{step.stepNumber}</h3>
+                                        <h4 class="font-heading text-2xl font-bold text-blue-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">{step.title}</h4>
+                                        <p class="text-gray-600 leading-relaxed">{step.description}</p>
+                                    </div>
+                                {/if}
+                            </div>
+
+                            <div 
+                                class="absolute left-4 md:left-1/2 top-0 md:top-1/2 w-8 h-8 bg-white border-4 border-blue-200 rounded-full flex items-center justify-center transform -translate-x-1/2 md:-translate-y-1/2 group-hover:border-blue-600 group-hover:scale-125 transition-all duration-500 z-10 shadow-sm"
+                                in:fade={{ duration: 400, delay: 100 + (index * 200) }}
+                            >
+                                <div class="w-2.5 h-2.5 bg-blue-600 rounded-full group-hover:bg-blue-500 transition-colors duration-300"></div>
+                            </div>
+
+                            <div class="w-full md:w-5/12 pl-14 md:pl-10 pt-1 md:pt-0">
+                                {#if index % 2 !== 0}
+                                    <div class="hidden md:block" in:fly={{ x: 40, duration: 800, delay: 200 + (index * 200) }}>
+                                        <h3 class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2">{step.stepNumber}</h3>
+                                        <h4 class="font-heading text-2xl font-bold text-blue-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">{step.title}</h4>
+                                        <p class="text-gray-600 leading-relaxed">{step.description}</p>
+                                    </div>
+                                {/if}
+                                
+                                <div class="block md:hidden" in:fly={{ x: 40, duration: 800, delay: 200 + (index * 200) }}>
+                                    <h3 class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2">{step.stepNumber}</h3>
+                                    <h4 class="font-heading text-2xl font-bold text-blue-900 mb-3">{step.title}</h4>
+                                    <p class="text-gray-600 leading-relaxed">{step.description}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    {/each}
+                {/if}
+            </div>
         </div>
     </div>
 </section>
