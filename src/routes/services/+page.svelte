@@ -12,32 +12,32 @@
         {
             title: "Managed IT Services",
             description: "Comprehensive support and proactive maintenance for your entire technology infrastructure, minimizing downtime and maximizing productivity.",
-            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`
+            iconPath: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
         },
         {
             title: "Data Backup Archival Services",
             description: "Automated, secure backups and long-term archiving solutions to ensure your critical business data is protected against loss and easily recoverable.",
-            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />`
+            iconPath: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
         },
         {
             title: "Email Spam Filtering",
             description: "Advanced filtering algorithms to block phishing attempts, malware, and unwanted spam before they ever reach your employees' inboxes.",
-            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`
+            iconPath: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
         },
         {
             title: "Cybersecurity Login Management",
             description: "Implement robust access controls, multi-factor authentication (MFA), and secure sign-on protocols to protect your business network from unauthorized access.",
-            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />`
+            iconPath: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
         },
         {
             title: "Endpoint Management",
             description: "Centralized monitoring, patching, and security management for all company devices, including laptops, desktops, and mobile phones.",
-            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />`
+            iconPath: "M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
         },
         {
             title: "Business Password Manager",
             description: "Secure, encrypted password vaults for your team. Safely share credentials, enforce strong password policies, and revoke access instantly when needed.",
-            icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />`
+            iconPath: "M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
         }
     ];
 
@@ -78,7 +78,6 @@
      * @param {Element} node
      * @param {{ index: number; isStep: boolean }} params
      */
-    // @ts-ignore
     function scrollSpy(node, { index, isStep = false }) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -132,7 +131,7 @@
     <div class="container mx-auto px-6">
         {#if isLoaded}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" transition:fade>
-                {#each services as service, index}
+                {#each services as service, index (service.title)}
                     <div 
                         class="relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group overflow-hidden cursor-pointer
                             {activeServiceCards[index] ? 'shadow-xl -translate-y-2 border-blue-400' : 'border-gray-100 hover:shadow-xl hover:-translate-y-2'}"
@@ -151,7 +150,7 @@
                         <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-3 group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-md transition-all duration-500
                             {activeServiceCards[index] ? 'scale-110 -rotate-3 bg-blue-600 text-white shadow-md' : 'bg-blue-50 text-blue-600 group-hover:scale-110 group-hover:-rotate-3 group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-md'}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                {@html service.icon}
+                                <path stroke-linecap="round" stroke-linejoin="round" d={service.iconPath} />
                             </svg>
                         </div>
                         
@@ -194,7 +193,7 @@
 
             <div class="space-y-16">
                 {#if isLoaded}
-                    {#each processSteps as step, index}
+                    {#each processSteps as step, index (step.stepNumber)}
                         <div 
                             class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center"
                             use:scrollSpy={{ index, isStep: true }}
