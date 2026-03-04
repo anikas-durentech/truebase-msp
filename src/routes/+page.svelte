@@ -4,10 +4,38 @@
     import { fade, fly } from 'svelte/transition';
 
     let isLoaded = false;
+    /**
+	 * @type {never[]}
+	 */
+    let activeCards = [];
 
     onMount(() => {
         isLoaded = true;
     });
+
+    /**
+	 * @param {Element} node
+	 * @param {string | number} index
+	 */
+    function scrollSpy(node, index) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (window.matchMedia("(max-width: 768px)").matches) {
+                    // @ts-ignore
+                    activeCards[index] = entry.isIntersecting;
+                }
+            });
+        }, {
+            rootMargin: '-45% 0px -45% 0px'
+        });
+
+        observer.observe(node);
+        return {
+            destroy() {
+                observer.unobserve(node);
+            }
+        };
+    }
 </script>
 
 <svelte:head>
@@ -85,10 +113,16 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <a href="/services" class="group relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden block">
-                <div class="absolute top-0 left-0 w-full h-1 bg-blue-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></div>
+            <a href="/services" class="group relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden block
+                    {activeCards[0] ? 'shadow-xl -translate-y-2 border-blue-400' : 'border-gray-100 hover:shadow-xl hover:-translate-y-2'}"
+                use:scrollSpy={0}
+            >
+                <div class="absolute top-0 left-0 w-full h-1 bg-blue-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out
+                    {activeCards[0] ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}">
+                </div>
                 
-                <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300
+                    {activeCards[0] ? 'scale-110 bg-blue-600 text-white' : 'bg-blue-50 text-blue-600 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white'}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
                     </svg>
@@ -97,7 +131,8 @@
                 <h3 class="font-heading text-2xl font-bold text-blue-800 mb-3">Managed IT Support</h3>
                 <p class="text-gray-600 mb-6">Proactive monitoring, maintenance, and reliable helpdesk support for your entire IT infrastructure.</p>
                 
-                <div class="flex items-center text-blue-600 font-semibold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <div class="flex items-center text-blue-600 font-semibold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300
+                    {activeCards[0] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0'}">
                     <span>Learn more</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -105,10 +140,17 @@
                 </div>
             </a>
 
-            <a href="/services" class="group relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden block">
-                <div class="absolute top-0 left-0 w-full h-1 bg-blue-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></div>
+            <a href="/services" 
+                class="group relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden block 
+                    {activeCards[1] ? 'shadow-xl -translate-y-2 border-blue-400' : 'border-gray-100 hover:shadow-xl hover:-translate-y-2'}"
+                use:scrollSpy={1}
+            >
+                <div class="absolute top-0 left-0 w-full h-1 bg-blue-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out
+                    {activeCards[1] ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}">
+                </div>
                 
-                <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300
+                    {activeCards[1] ? 'scale-110 bg-blue-600 text-white' : 'bg-blue-50 text-blue-600 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white'}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
                     </svg>
@@ -117,7 +159,8 @@
                 <h3 class="font-heading text-2xl font-bold text-blue-800 mb-3">Data Backup & Archival</h3>
                 <p class="text-gray-600 mb-6">Secure, automated backups and archiving to ensure your critical business data is never lost.</p>
                 
-                <div class="flex items-center text-blue-600 font-semibold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <div class="flex items-center text-blue-600 font-semibold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300
+                    {activeCards[1] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0'}">
                     <span>Learn more</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -125,10 +168,16 @@
                 </div>
             </a>
 
-            <a href="/services" class="group relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden block">
-                <div class="absolute top-0 left-0 w-full h-1 bg-blue-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></div>
+            <a href="/services" class="group relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden block
+                    {activeCards[2] ? 'shadow-xl -translate-y-2 border-blue-400' : 'border-gray-100 hover:shadow-xl hover:-translate-y-2'}"
+                use:scrollSpy={2}
+            >
+                <div class="absolute top-0 left-0 w-full h-1 bg-blue-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out
+                    {activeCards[2] ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}">
+                </div>
                 
-                <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300
+                    {activeCards[2] ? 'scale-110 bg-blue-600 text-white' : 'bg-blue-50 text-blue-600 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white'}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
@@ -137,7 +186,8 @@
                 <h3 class="font-heading text-2xl font-bold text-blue-800 mb-3">Cybersecurity & Endpoints</h3>
                 <p class="text-gray-600 mb-6">Robust endpoint management and cybersecurity login management to protect against modern threats.</p>
                 
-                <div class="flex items-center text-blue-600 font-semibold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <div class="flex items-center text-blue-600 font-semibold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300
+                    {activeCards[2] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0'}">
                     <span>Learn more</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />

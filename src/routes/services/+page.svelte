@@ -65,27 +65,42 @@
     ];
 
     /**
+     * @type {any[]}
+     */
+    let activeServiceCards = [];
+
+    /**
 	 * @type {any[]}
 	 */
     let activeSteps = [];
 
     /**
-	 * @param {Element} node
-	 * @param {string | number} index
-	 */
-    function scrollSpy(node, index) {
+     * @param {Element} node
+     * @param {{ index: number; isStep: boolean }} params
+     */
+    // @ts-ignore
+    function scrollSpy(node, { index, isStep = false }) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // @ts-ignore
-                activeSteps[index] = entry.isIntersecting;
+                if (window.matchMedia("(max-width: 768px)").matches) {
+                    if (isStep) {
+                        activeSteps[index] = entry.isIntersecting;
+                        activeSteps = [...activeSteps];
+                    } else {
+                        activeServiceCards[index] = entry.isIntersecting;
+                        activeServiceCards = [...activeServiceCards];
+                    }
+                }
+                if (isStep) {
+                    activeSteps[index] = entry.isIntersecting;
+                    activeSteps = [...activeSteps];
+                }
             });
-            activeSteps = [...activeSteps];
         }, {
             rootMargin: '-45% 0px -45% 0px'
         });
 
         observer.observe(node);
-
         return {
             destroy() {
                 observer.disconnect();
@@ -119,31 +134,42 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" transition:fade>
                 {#each services as service, index}
                     <div 
-                        class="relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group overflow-hidden cursor-pointer"
+                        class="relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group overflow-hidden cursor-pointer
+                            {activeServiceCards[index] ? 'shadow-xl -translate-y-2 border-blue-400' : 'border-gray-100 hover:shadow-xl hover:-translate-y-2'}"
                         in:fly={{
                             x: -200, 
                             y: 100,
                             duration: 1000, 
                             delay: 200 + (index * 150) 
                         }}
+                        use:scrollSpy={{ index, isStep: false }}
                     >
-                        <div class="absolute top-0 left-0 w-full h-1 bg-blue-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"></div>
+                        <div class="absolute top-0 left-0 w-full h-1 bg-blue-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out
+                            {activeServiceCards[index] ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}">
+                        </div>
                         
-                        <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-3 group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-md transition-all duration-500">
+                        <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-3 group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-md transition-all duration-500
+                            {activeServiceCards[index] ? 'scale-110 -rotate-3 bg-blue-600 text-white shadow-md' : 'bg-blue-50 text-blue-600 group-hover:scale-110 group-hover:-rotate-3 group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-md'}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 {@html service.icon}
                             </svg>
                         </div>
                         
-                        <h3 class="font-heading text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700 transition-colors duration-300">{service.title}</h3>
+                        <h3 class="font-heading text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700 transition-colors duration-300
+                                {activeServiceCards[index] ? 'text-blue-700' : 'text-blue-900 group-hover:text-blue-700'}">
+                            {service.title}
+                        </h3>
                         
                         <p class="text-gray-600 leading-relaxed mb-6">
                             {service.description}
                         </p>
 
-                        <div class="flex items-center text-blue-600 font-semibold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
+                        <div class="flex items-center text-blue-600 font-semibold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500
+                                {activeServiceCards[index] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0'}">
                             <span>Contact us about this</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300
+                                    {activeServiceCards[index] ? 'translate-x-1' : 'group-hover:translate-x-1'}" 
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
                         </div>
@@ -171,7 +197,7 @@
                     {#each processSteps as step, index}
                         <div 
                             class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center"
-                            use:scrollSpy={index}
+                            use:scrollSpy={{ index, isStep: true }}
                         >
                             
                             <div class="hidden md:block w-5/12 text-right pr-10">
