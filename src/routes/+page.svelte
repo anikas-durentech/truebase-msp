@@ -242,7 +242,7 @@
             </div>
 
             <div class="lg:w-1/2 w-full">
-                <div class="grid grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="bg-blue-800/50 border border-blue-700 p-8 rounded-2xl text-center backdrop-blur-sm hover:-translate-y-1 transition-transform duration-300">
                         <div class="text-5xl font-bold text-blue-400 mb-2 font-heading">99.9%</div>
                         <div class="text-blue-100 font-semibold">Uptime Guarantee</div>
