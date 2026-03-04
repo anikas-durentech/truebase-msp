@@ -61,7 +61,36 @@
             title: "Proactive Management",
             description: "Your systems are monitored 24/7. We handle the updates, patch management, and helpdesk support so you can focus on running your business."
         },
-    ]
+    ];
+
+    /**
+	 * @type {any[]}
+	 */
+    let activeSteps = [];
+
+    /**
+	 * @param {Element} node
+	 * @param {string | number} index
+	 */
+    function scrollSpy(node, index) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // @ts-ignore
+                activeSteps[index] = entry.isIntersecting;
+            });
+            activeSteps = [...activeSteps];
+        }, {
+            rootMargin: '-45% 0px -45% 0px'
+        });
+
+        observer.observe(node);
+
+        return {
+            destroy() {
+                observer.disconnect();
+            }
+        };
+    }
 </script>
 
 <svelte:head>
@@ -134,37 +163,40 @@
             <div class="space-y-16">
                 {#if isLoaded}
                     {#each processSteps as step, index}
-                        <div class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center group">
+                        <div 
+                            class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center"
+                            use:scrollSpy={index}
+                        >
                             
                             <div class="hidden md:block w-5/12 text-right pr-10">
                                 {#if index % 2 === 0}
                                     <div in:fly={{ x: -40, duration: 800, delay: 200 + (index * 200) }}>
                                         <h3 class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2">{step.stepNumber}</h3>
-                                        <h4 class="font-heading text-2xl font-bold text-blue-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">{step.title}</h4>
+                                        <h4 class="font-heading text-2xl font-bold mb-3 transition-colors duration-500 {activeSteps[index] ? 'text-blue-600' : 'text-blue-900'}">{step.title}</h4>
                                         <p class="text-gray-600 leading-relaxed">{step.description}</p>
                                     </div>
                                 {/if}
                             </div>
 
                             <div 
-                                class="absolute left-4 md:left-1/2 top-0 md:top-1/2 w-8 h-8 bg-white border-4 border-blue-200 rounded-full flex items-center justify-center transform -translate-x-1/2 md:-translate-y-1/2 group-hover:border-blue-600 group-hover:scale-125 transition-all duration-500 z-10 shadow-sm"
+                                class="absolute left-4 md:left-1/2 top-0 md:top-1/2 w-8 h-8 bg-white border-4 rounded-full flex items-center justify-center transform -translate-x-1/2 md:-translate-y-1/2 transition-all duration-500 z-10 shadow-sm {activeSteps[index] ? 'border-blue-600 scale-125' : 'border-blue-200'}"
                                 in:fade={{ duration: 400, delay: 100 + (index * 200) }}
                             >
-                                <div class="w-2.5 h-2.5 bg-blue-600 rounded-full group-hover:bg-blue-500 transition-colors duration-300"></div>
+                                <div class="w-2.5 h-2.5 rounded-full transition-colors duration-500 {activeSteps[index] ? 'bg-blue-500' : 'bg-blue-600'}"></div>
                             </div>
 
                             <div class="w-full md:w-5/12 pl-14 md:pl-10 pt-1 md:pt-0">
                                 {#if index % 2 !== 0}
                                     <div class="hidden md:block" in:fly={{ x: 40, duration: 800, delay: 200 + (index * 200) }}>
                                         <h3 class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2">{step.stepNumber}</h3>
-                                        <h4 class="font-heading text-2xl font-bold text-blue-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">{step.title}</h4>
+                                        <h4 class="font-heading text-2xl font-bold mb-3 transition-colors duration-500 {activeSteps[index] ? 'text-blue-600' : 'text-blue-900'}">{step.title}</h4>
                                         <p class="text-gray-600 leading-relaxed">{step.description}</p>
                                     </div>
                                 {/if}
                                 
                                 <div class="block md:hidden" in:fly={{ x: 40, duration: 800, delay: 200 + (index * 200) }}>
                                     <h3 class="text-blue-600 font-bold text-sm tracking-widest uppercase mb-2">{step.stepNumber}</h3>
-                                    <h4 class="font-heading text-2xl font-bold text-blue-900 mb-3">{step.title}</h4>
+                                    <h4 class="font-heading text-2xl font-bold mb-3 transition-colors duration-500 {activeSteps[index] ? 'text-blue-600' : 'text-blue-900'}">{step.title}</h4>
                                     <p class="text-gray-600 leading-relaxed">{step.description}</p>
                                 </div>
                             </div>
