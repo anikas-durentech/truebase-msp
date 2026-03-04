@@ -1,9 +1,10 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, tick } from 'svelte';
     import { fade, fly } from 'svelte/transition';
 
     let isLoaded = false;
-    onMount(() => {
+    onMount(async () => {
+        await tick();
         isLoaded = true;
     });
 
@@ -114,12 +115,17 @@
 
 <section class="py-20 bg-gray-50">
     <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {#if isLoaded}
+        {#if isLoaded}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" transition:fade>
                 {#each services as service, index}
                     <div 
                         class="relative bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group overflow-hidden cursor-pointer"
-                        in:fly={{ y: 40, duration: 800, delay: 150 + (index * 100) }}
+                        in:fly={{
+                            x: -200, 
+                            y: 100,
+                            duration: 1000, 
+                            delay: 200 + (index * 150) 
+                        }}
                     >
                         <div class="absolute top-0 left-0 w-full h-1 bg-blue-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"></div>
                         
@@ -143,8 +149,8 @@
                         </div>
                     </div>
                 {/each}
-            {/if}
-        </div>
+            </div>
+        {/if}
     </div>
 </section>
 
