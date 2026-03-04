@@ -1,5 +1,6 @@
 <script>
     import { onMount } from 'svelte';
+	import { circOut } from 'svelte/easing';
     import { fade, fly } from 'svelte/transition';
 
     let isLoaded = false;
@@ -24,13 +25,19 @@
             <div class="absolute inset-0 bg-blue-950/80 mix-blend-multiply"></div>
         </div>
 
+        <div class="absolute inset-0 bg-radial from-transparent via-transparent to-black/70"></div>
+
         <div class="relative z-10 container mx-auto px-4 text-center text-white">
             <h1 
                 class="font-heading text-5xl md:text-6xl font-bold mb-6 tracking-tight"
-                in:fly={{ y: 30, duration: 800, delay: 100 }}
             >
-                Empowering Your Business with <br class="hidden md:block" />
-                <span class="text-blue-400">Reliable IT Solutions</span>
+                <span class="block" in:fly={{ x: 75, duration: 800, delay: 100, easing: circOut }}>
+                    Empowering Your Business with <br class="hidden md:block" />
+                </span>
+
+                <span class="text-blue-400 block" in:fly={{ x: -75, duration: 800, delay: 200, easing: circOut }}>
+                    Reliable IT Solutions
+                </span>
             </h1>
             
             <p 
