@@ -165,7 +165,7 @@
 
                         <div class="flex items-center text-blue-600 font-semibold opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500
                                 {activeServiceCards[index] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0'}">
-                            <span>Contact us about this</span>
+                            <a href="/contact" class="hover:text-blue-700">Contact us about this</a>
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300
                                     {activeServiceCards[index] ? 'translate-x-1' : 'group-hover:translate-x-1'}" 
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
