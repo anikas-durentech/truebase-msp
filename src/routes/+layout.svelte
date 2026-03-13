@@ -42,8 +42,8 @@
                 {#each navLinks as link}
                     <a href={link.href} class="hover:text-blue-600 transition-colors">{link.name}</a>
                 {/each}
-                <a href="tel:+1234567890" class="bg-blue-800 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors ml-4 shadow-md">
-                    Call Us
+                <a href="/contact" class="bg-blue-800 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors ml-4 shadow-md">
+                    Contact Us
                 </a>
             </nav>
 
