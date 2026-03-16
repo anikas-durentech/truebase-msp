@@ -57,9 +57,14 @@
                             <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all resize-none" placeholder="How can we help your business?"></textarea>
                         </div>
 
-                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-lg transition-colors duration-300 shadow-md hover:-translate-y-1">
-                            Send Message
-                        </button>
+                        <div class="group">
+                            <button 
+                                type="submit" 
+                                class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-lg transition-all duration-300 shadow-md group-hover:-translate-y-1 cursor-pointer"
+                            >
+                                Send Message
+                            </button>
+                        </div>
                     </form>
                 </div>
 
