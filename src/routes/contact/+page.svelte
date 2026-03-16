@@ -1,13 +1,48 @@
 <script>
     import { onMount } from 'svelte';
-    import { fade, fly } from 'svelte/transition';
+    import { fly, fade } from 'svelte/transition';
     import { circOut } from 'svelte/easing';
 
     let isLoaded = false;
+    let isSubmitting = false;
+    let isSent = false;
 
     onMount(() => {
         isLoaded = true;
     });
+
+    /**
+     * @param {SubmitEvent} event
+     */
+    async function handleSubmit(event) {
+        event.preventDefault();
+        isSubmitting = true;
+
+        if (!(event.target instanceof HTMLFormElement)) return;
+
+        const formData = new FormData(event.target);
+
+        try {
+            const response = await fetch(event.target.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                isSent = true;
+            } else {
+                const data = await response.json();
+                alert(data.errors ? data.errors.map((/** @type {{ message: any; }} */ e) => e.message).join(", ") : "Submission failed. Please try again.");
+            }
+        } catch (error) {
+            alert("There was an error submitting your form. Please try again.");
+        } finally {
+            isSubmitting = false;
+        }
+    }
 </script>
 
 <svelte:head>
@@ -36,36 +71,54 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 bg-white rounded-2xl shadow-xl overflow-hidden">
                 
                 <div 
-                    class="p-8 md:p-12"
+                    class="p-8 md:p-12 min-h-125 flex flex-col justify-center"
                     in:fly={{ x: -50, duration: 800, delay: 300, easing: circOut }}
                 >
-                    <h2 class="font-heading text-2xl font-bold text-blue-900 mb-6">Send Us a Message</h2>
-                    
-                    <form action="https://formspree.io/f/meerzave" method="POST" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder="John Doe">
+                    {#if isSent}
+                        <div in:fade={{ duration: 400 }} class="text-center">
+                            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <h2 class="font-heading text-3xl font-bold text-blue-900 mb-4">Message Sent!</h2>
+                            <p class="text-gray-600 text-lg">Thank you for reaching out. We've received your message and will get back to you shortly.</p>
                         </div>
+                    {:else}
+                        <h2 class="font-heading text-2xl font-bold text-blue-900 mb-6">Send Us a Message</h2>
                         
-                        <div>
-                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder="john@example.com">
-                        </div>
+                        <form 
+                            on:submit={handleSubmit} 
+                            action="https://formspree.io/f/meerzave" 
+                            method="POST" 
+                            class="space-y-6"
+                        >
+                            <div>
+                                <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder="John Doe">
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder="john@example.com">
+                            </div>
 
-                        <div>
-                            <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
-                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all resize-none" placeholder="How can we help your business?"></textarea>
-                        </div>
+                            <div>
+                                <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all resize-none" placeholder="How can we help your business?"></textarea>
+                            </div>
 
-                        <div class="group">
-                            <button 
-                                type="submit" 
-                                class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-lg transition-all duration-300 shadow-md group-hover:-translate-y-1 cursor-pointer"
-                            >
-                                Send Message
-                            </button>
-                        </div>
-                    </form>
+                            <div class="group">
+                                <button 
+                                    type="submit" 
+                                    disabled={isSubmitting}
+                                    class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-lg transition-all duration-300 shadow-md group-hover:-translate-y-1 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+                                >
+                                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                                </button>
+                            </div>
+                        </form>
+                    {/if}
                 </div>
 
                 <div 
