@@ -136,7 +136,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-blue-200 text-sm tracking-wider uppercase mb-1">Phone</h3>
-                                <a href="tel:+1234567890" class="text-xl font-bold hover:text-blue-300 transition-colors">+1 (234) 567-890</a>
+                                <a href="tel:+16784397037" class="text-xl font-bold hover:text-blue-300 transition-colors">+1 (678) 439-7037</a>
                             </div>
                         </div>
 
